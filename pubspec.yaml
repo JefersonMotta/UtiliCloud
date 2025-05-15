@@ -1,0 +1,26 @@
+name: utilicloud
+description: "UtiliCloud: ferramentas online, calculadoras e utilitários práticos para facilitar sua rotina."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  get: ^4.6.6
+  cupertino_icons: ^1.0.2
+  intl: ^0.18.1
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
