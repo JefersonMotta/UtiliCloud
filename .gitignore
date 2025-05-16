@@ -1,4 +1,16 @@
-# Miscellaneous
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
 *.class
 *.log
 *.pyc
@@ -10,34 +22,61 @@
 .svn/
 migrate_working_dir/
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
+# Arquivos de configuração do Firebase
+google-services.json
+GoogleService-Info.plist
+firebase_options.dart
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Arquivos de deploy
+deploy_automatico.bat
+.github/workflows/deploy.yml
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+# Arquivos Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
 
-# Symbolication related
-app.*.symbols
+# Arquivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
+# Arquivos de build do Android
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/gradle-wrapper.jar
+/android/gradlew
+/android/gradlew.bat
+/android/local.properties
+/android/key.properties
+/android/.gradle
+
+# Arquivos de build do iOS
+/ios/Pods/
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/ServiceDefinitions.json
+/ios/Runner.xcworkspace/xcshareddata/
+/ios/Runner.xcworkspace/xcuserdata/
+
+# Arquivos de build do Web
+/web/firebase-config.js
+
+# Arquivos de cobertura de testes
+coverage/
+.test_coverage.dart
+.test_runner.dart
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.bak

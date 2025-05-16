@@ -12,6 +12,7 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return ResponsiveScaffold(
       title: 'Calculadora de Férias',
@@ -20,20 +21,20 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
         IconButton(
           icon: const Icon(Icons.help_outline),
           onPressed: () {
-            // Mostrar ajuda
+            _mostrarAjuda(context);
           },
         ),
       ],
       drawer: const AppDrawer(currentRoute: '/calculadora-ferias'),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(isMobile ? 8.0 : 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Cabeçalho
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(isMobile ? 12.0 : 16.0),
                 decoration: BoxDecoration(
                   color: colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(16),
@@ -42,7 +43,7 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
                   children: [
                     Icon(
                       Icons.beach_access,
-                      size: 40,
+                      size: isMobile ? 32 : 40,
                       color: colorScheme.onPrimaryContainer,
                     ),
                     const SizedBox(width: 16),
@@ -53,7 +54,7 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
                           Text(
                             'Calculadora de Férias',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: isMobile ? 18 : 20,
                               fontWeight: FontWeight.bold,
                               color: colorScheme.onPrimaryContainer,
                             ),
@@ -62,7 +63,7 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
                           Text(
                             'Preencha os dados para calcular suas férias conforme a CLT',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: isMobile ? 12 : 14,
                               color: colorScheme.onPrimaryContainer.withOpacity(0.8),
                             ),
                           ),
@@ -410,6 +411,102 @@ class CalculadoraFeriasPage extends GetView<CalculadoraFeriasController> {
           ),
         ],
       ),
+    );
+  }
+
+  void _mostrarAjuda(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(Icons.beach_access, color: colorScheme.primary),
+              const SizedBox(width: 10),
+              const Text('Ajuda - Calculadora de Férias'),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildAjudaSection(
+                  'Como usar esta calculadora:',
+                  [
+                    'Preencha seu salário bruto mensal',
+                    'Informe o valor médio de horas extras (se houver)',
+                    'Indique o número de dependentes para cálculo do IR',
+                    'Escolha quantos dias de férias deseja tirar (entre 10 e 30)',
+                    'Selecione se deseja vender 1/3 das férias (abono pecuniário)',
+                    'Escolha se quer adiantar a 1ª parcela do 13º salário',
+                    'Clique em "Calcular" para ver o resultado'
+                  ],
+                  colorScheme,
+                ),
+                const SizedBox(height: 16),
+                _buildAjudaSection(
+                  'Informações importantes:',
+                  [
+                    'O cálculo segue as regras da CLT (Consolidação das Leis do Trabalho)',
+                    'Os valores de INSS e IRRF são calculados conforme as tabelas vigentes',
+                    'O abono pecuniário permite vender até 10 dias de férias',
+                    'O adiantamento do 13º corresponde a 50% do salário bruto',
+                    'Esta calculadora fornece uma estimativa, valores reais podem variar'
+                  ],
+                  colorScheme,
+                ),
+                const SizedBox(height: 16),
+                _buildAjudaSection(
+                  'Direitos do trabalhador:',
+                  [
+                    'Todo trabalhador tem direito a 30 dias de férias após 12 meses de trabalho',
+                    'As férias devem ser concedidas nos 12 meses seguintes à aquisição do direito',
+                    'O pagamento das férias deve ser feito até 2 dias antes do início do período',
+                    'O adicional de 1/3 sobre o valor das férias é garantido pela Constituição'
+                  ],
+                  colorScheme,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Fechar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildAjudaSection(String title, List<String> items, ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: colorScheme.primary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        ...items.map((item) => Padding(
+              padding: const EdgeInsets.only(bottom: 6.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('• ', style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold)),
+                  Expanded(child: Text(item)),
+                ],
+              ),
+            )),
+      ],
     );
   }
 }
