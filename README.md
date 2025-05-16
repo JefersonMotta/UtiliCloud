@@ -61,3 +61,8 @@ Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para m
 Para dúvidas ou sugestões, entre em contato através do email: [ jefersonmotta@jbwconnect.com ]
 
 Desenvolvido em Flutter e GetX.
+
+
+### Configuração do Ambiente
+
+1. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
